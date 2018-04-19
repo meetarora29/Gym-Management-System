@@ -184,7 +184,7 @@ class Query {
 
     static void print_bodypart_machine(String machine) {
         try {
-            ResultSet resultSet=statement.executeQuery("SELECT M.Name, E.`Body Part` FROM gym.Equipment AS M INNER JOIN gym.Exercise AS E ON M.Name = E.Equipment WHERE M.Name = '" + machine +"'");
+            ResultSet resultSet=statement.executeQuery("SELECT E.`Body Part` FROM gym.Equipment AS M INNER JOIN gym.Exercise AS E ON M.Name = E.Equipment WHERE M.Name = '" + machine +"'");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -199,6 +199,24 @@ class Query {
                     "  (SELECT COALESCE(sum(J.Cost), 0) FROM gym.Members AS M INNER JOIN gym.Plans AS J ON M.Plan = J.Name WHERE (M.`Plan Started` >= '" + sql_lower + "' AND M.`Plan Started` <= '" + sql_upper + "')) -" +
                     "  (SELECT COALESCE(sum(Salary), 0) FROM gym.Trainers AS T WHERE (T.`Last Paid` >= '" + sql_lower + "' AND T.`Last Paid` <= '" + sql_upper + "')) -" +
                     "  (SELECT COALESCE(sum(E.Cost), 0) FROM gym.Equipment AS E WHERE (E.`Purchased On` >= '" + sql_lower + "' AND E.`Purchased On` <= '" + sql_upper + "'))");
+            display_rows(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void count_by_sex(int lower, int upper) {
+        try {
+            ResultSet resultSet=statement.executeQuery("SELECT Sex, count(Sex) FROM gym.Members WHERE Age BETWEEN " + lower + " AND " + upper + " GROUP BY Sex");
+            display_rows(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void print_popular_trainer() {
+        try {
+            ResultSet resultSet=statement.executeQuery("SELECT T.Name, count(`Trainer ID`) as cnt FROM gym.Trainers as T INNER JOIN gym.Members AS M ON T.ID = M.`Trainer ID` GROUP BY T.Name ORDER BY cnt DESC LIMIT 1");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();

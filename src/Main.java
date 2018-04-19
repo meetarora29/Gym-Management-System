@@ -35,9 +35,15 @@ public class Main {
 //        Query.print_members_with_plans_expired();
 
         // Body part for machine
-//        Query.print_bodypart_machine("b");
+//        Query.print_bodypart_machine("bench");
 
         // Get profit / loss
 //        Query.print_proloss(new Date(), new Date());
+
+        // Get count of sex with age limits
+//        Query.count_by_sex(20, 24);
+
+        // Print popular trainer
+        Query.print_popular_trainer();
     }
 }
