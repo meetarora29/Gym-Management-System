@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="equip_status" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DispEquipStatusController">
+   <children>
+      <ChoiceBox fx:id="status" layoutX="319.0" layoutY="187.0" prefHeight="27.0" prefWidth="238.0" />
+      <Label layoutX="67.0" layoutY="191.0" text="Select Status of Equipments">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="done" layoutX="498.0" layoutY="334.0" mnemonicParsing="false" onAction="#clickDone" text="Done" />
+      <Button fx:id="back" layoutX="409.0" layoutY="334.0" mnemonicParsing="false" onAction="#clickBack" text="Back" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="disp_mem_age" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DispMemberAgeController">
+   <children>
+      <Button fx:id="done" layoutX="487.0" layoutY="326.0" mnemonicParsing="false" onAction="#clickDone" text="Done" />
+      <Label layoutX="116.0" layoutY="144.0" text="Lower Age">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="116.0" layoutY="218.0" text="Upper Ager">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="387.0" layoutY="326.0" mnemonicParsing="false" onAction="#clickBack" text="Back" />
+      <Slider fx:id="lowerAge" layoutX="275.0" layoutY="149.0" prefHeight="16.0" prefWidth="167.0" />
+      <Slider fx:id="upperAge" layoutX="275.0" layoutY="223.0" prefHeight="16.0" prefWidth="167.0" />
+      <Label fx:id="upper" layoutX="504.0" layoutY="218.0" prefHeight="27.0" prefWidth="63.0" />
+      <Label fx:id="lower" layoutX="504.0" layoutY="144.0" prefHeight="27.0" prefWidth="63.0" />
+   </children>
+</AnchorPane>

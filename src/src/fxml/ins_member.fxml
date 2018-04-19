@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="add_mem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InsertMemController">
+   <children>
+      <TextField fx:id="age" layoutX="284.0" layoutY="57.5" onAction="#getAge" prefHeight="15.0" />
+      <TextField fx:id="plan" layoutX="284.0" layoutY="217.25" onAction="#getPlan" prefHeight="15.0" />
+      <TextField fx:id="trainer" layoutX="284.0" layoutY="270.5" onAction="#getTrainer" prefHeight="15.0" />
+      <TextField fx:id="ph_num" layoutX="284.0" layoutY="164.0" onAction="#getNum" prefHeight="15.0" />
+      <TextField fx:id="mem_since" layoutX="284.0" layoutY="323.75" onAction="#getMemSince" prefHeight="15.0" />
+      <TextField fx:id="name" layoutX="284.0" layoutY="3.75" onAction="#getName" prefHeight="15.0" />
+      <TextField fx:id="gender" layoutX="284.0" layoutY="110.75" onAction="#getGender" prefHeight="15.0" />
+      <Label layoutX="105.0" layoutY="4.0" prefHeight="15.0" prefWidth="167.0" text="Name">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="322.0" prefHeight="15.0" prefWidth="167.0" text="Member Since">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="269.0" prefHeight="15.0" prefWidth="167.0" text="Trainer">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="216.0" prefHeight="15.0" prefWidth="167.0" text="Plan">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="163.0" prefHeight="15.0" prefWidth="167.0" text="Ph. Number">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="109.0" prefHeight="15.0" prefWidth="167.0" text="Sex">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="56.0" prefHeight="15.0" prefWidth="167.0" text="Age">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="add" layoutX="468.0" layoutY="351.0" mnemonicParsing="false" onAction="#clickAdd" text="Add" />
+      <Button fx:id="back" layoutX="537.0" layoutY="351.0" mnemonicParsing="false" onAction="#clickBack" text="Back" />
+   </children>
+</AnchorPane>
