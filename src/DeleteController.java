@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class DeleteController {
-    public String id;
+    public static String id;
 
     @FXML
     private AnchorPane del_pane;
