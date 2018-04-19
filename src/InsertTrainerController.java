@@ -1,14 +1,24 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.converter.CharacterStringConverter;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class InsertTrainerController {
 
+    ObservableList<String> list= FXCollections.observableArrayList("Male","Female","Others");
     @FXML
     private AnchorPane add_trainer;
 
@@ -16,7 +26,7 @@ public class InsertTrainerController {
     private TextField age;
 
     @FXML
-    private TextField last_paid;
+    private DatePicker date;
 
     @FXML
     private TextField salary;
@@ -25,7 +35,7 @@ public class InsertTrainerController {
     private TextField name;
 
     @FXML
-    private TextField gender;
+    private ChoiceBox<String> gender;
 
     @FXML
     private Button add;
@@ -35,6 +45,14 @@ public class InsertTrainerController {
 
     @FXML
     void clickAdd(ActionEvent event) {
+        Query q=new Query();
+        StringBuilder sb = new StringBuilder(name.getCharacters().length());
+        StringBuilder sb1 = new StringBuilder(age.getCharacters().length());
+        String s=sb1.append(age.getCharacters()).toString();
+        LocalDate localDate = date.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date1 = Date.from(instant);
+        q.insert_trainer(sb.append(name.getCharacters()).toString(),Integer.parseInt(s),gender.getValue(),0,date1);
 
     }
 
@@ -66,6 +84,12 @@ public class InsertTrainerController {
 
     @FXML
     void getSalary(ActionEvent event) {
+
+    }
+    @FXML
+    void initialize() {
+        gender.setItems(list);
+
 
     }
 

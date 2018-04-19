@@ -6,6 +6,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class InsertExerciseController {
 
@@ -30,6 +34,15 @@ public class InsertExerciseController {
     @FXML
     void clickAdd(ActionEvent event) {
 
+        Query q=new Query();
+        StringBuilder sb = new StringBuilder(name.getCharacters().length());
+        StringBuilder sb1 = new StringBuilder(body_part.getCharacters().length());
+        StringBuilder sb2 = new StringBuilder(Equipment.getCharacters().length());
+        String s=sb1.append(body_part.getCharacters()).toString();
+        String s1=sb2.append(Equipment.getCharacters()).toString();
+
+
+        q.insert_exercise(sb.append(name.getCharacters()).toString(),s,s1);
     }
 
     @FXML

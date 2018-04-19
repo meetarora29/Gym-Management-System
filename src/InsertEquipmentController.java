@@ -6,10 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class InsertEquipmentController {
 
@@ -18,7 +23,7 @@ public class InsertEquipmentController {
     private AnchorPane add_equipment;
 
     @FXML
-    private TextField purchased;
+    private DatePicker date;
 
     @FXML
     private ChoiceBox<String> status;
@@ -41,8 +46,17 @@ public class InsertEquipmentController {
     @FXML
     void clickAdd(ActionEvent event) {
 
-    }
+        Query q=new Query();
+        StringBuilder sb = new StringBuilder(name.getCharacters().length());
+        StringBuilder sb1 = new StringBuilder(cost.getCharacters().length());
+        StringBuilder sb2 = new StringBuilder(bodypart.getCharacters().length());
+        String s=sb1.append(cost.getCharacters()).toString();
+        LocalDate localDate = date.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date1 = Date.from(instant);
 
+        q.insert_equipment(sb.append(name.getCharacters()).toString(),date1,Integer.parseInt(s),sb2.append(bodypart.getCharacters()).toString(), status.getValue());
+    }
     @FXML
     void clickBack(ActionEvent event) throws IOException {
         AnchorPane pane= FXMLLoader.load(getClass().getResource("fxml/insert_queries.fxml"));

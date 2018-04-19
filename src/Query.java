@@ -8,7 +8,7 @@ class Query {
     private static Connection connection;
     private static Statement statement;
 
-    private Query() {
+    public Query() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/gym", "meet", "meet");
@@ -25,7 +25,7 @@ class Query {
     }
 
     // Insertion Queries
-    static void insert_trainer(String name, int age, String sex, int salary, Date last_paid) {
+     public static void insert_trainer(String name, int age, String sex, int salary, Date last_paid) {
         java.sql.Date sqlDate= new java.sql.Date(last_paid.getTime());
         try {
             int res=statement.executeUpdate("INSERT INTO gym.Trainers (Name, Age, Sex, Salary, `Last Paid`) VALUES ('" + name +"'," + age + ",'" + sex + "'," + salary + ",'" + sqlDate +"')");
@@ -39,7 +39,7 @@ class Query {
         }
     }
 
-    static void insert_member(String name, int age, String sex, String phone, String plan, int trainer, Date plan_started) {
+    public static void insert_member(String name, int age, String sex, String phone, String plan, int trainer, Date plan_started) {
         java.sql.Date sql_planstarted= new java.sql.Date(plan_started.getTime());
         try {
             int res=statement.executeUpdate("INSERT INTO gym.Members (Name, Age, Sex, Phone, Plan, Trainer, `Plan Started`) VALUES ('" + name +"'," + age + ",'" + sex + "','" + phone + "','" + plan + "'," + trainer + ",'"+ sql_planstarted +"')");
