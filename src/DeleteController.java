@@ -55,7 +55,7 @@ public class DeleteController {
     void delMember(ActionEvent event) throws IOException {
         AnchorPane pane= FXMLLoader.load(getClass().getResource("fxml/deletion.fxml"));
         del_pane.getChildren().setAll(pane);
-        id="Member";
+        id="Members";
 
     }
 
@@ -63,14 +63,14 @@ public class DeleteController {
     void delPlan(ActionEvent event) throws IOException {
         AnchorPane pane= FXMLLoader.load(getClass().getResource("fxml/deletion.fxml"));
         del_pane.getChildren().setAll(pane);
-        id="Plan";
+        id="Plans";
     }
 
     @FXML
     void delTrainer(ActionEvent event) throws IOException {
         AnchorPane pane= FXMLLoader.load(getClass().getResource("fxml/deletion.fxml"));
         del_pane.getChildren().setAll(pane);
-        id="Trainer";
+        id="Trainers";
     }
 
 }
