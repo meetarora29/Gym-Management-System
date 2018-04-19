@@ -48,7 +48,7 @@ public class InsertMemController {
 
     @FXML
     void clickAdd(ActionEvent event) {
-        Query q=new Query();
+
         StringBuilder sb = new StringBuilder(name.getCharacters().length());
         StringBuilder sb1 = new StringBuilder(age.getCharacters().length());
         StringBuilder sb2 = new StringBuilder(ph_num.getCharacters().length());
@@ -60,7 +60,7 @@ public class InsertMemController {
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date1 = Date.from(instant);
 
-        q.insert_member(sb.append(name.getCharacters()).toString(),Integer.parseInt(s),gender.getValue(),sb2.append(ph_num.getCharacters()).toString(), sb3.append(plan.getCharacters()).toString(),Integer.parseInt(s1),date1);
+        Query.insert_member(sb.append(name.getCharacters()).toString(),Integer.parseInt(s),gender.getValue(),sb2.append(ph_num.getCharacters()).toString(), sb3.append(plan.getCharacters()).toString(),Integer.parseInt(s1),date1);
     }
     @FXML
     void clickBack(ActionEvent event) throws IOException {

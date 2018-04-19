@@ -32,14 +32,11 @@ public class DispEquipController {
         disp_equip.getChildren().setAll(pane);
     }
 
-    @FXML
-    void getMoney_spent(ActionEvent event) {
 
-    }
 
     @FXML
     void getNames(ActionEvent event) {
-
+        Query.print_all("Equipment");
     }
 
     @FXML

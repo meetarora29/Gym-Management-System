@@ -40,7 +40,7 @@ public class DispMemberAgeController {
 
     @FXML
     void clickDone(ActionEvent event) {
-
+        Query.print_in_age_group("Members",(int)lowerAge.getValue(),(int)upperAge.getValue());
     }
 
     @FXML

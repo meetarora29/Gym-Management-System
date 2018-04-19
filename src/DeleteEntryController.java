@@ -35,8 +35,8 @@ public class DeleteEntryController {
         StringBuilder sb = new StringBuilder(name.getCharacters().length());
         StringBuilder sb1 = new StringBuilder(id.getCharacters().length());
         String s=sb1.append(id.getCharacters()).toString();
-        Query q=new Query();
-        q.delete_entry(DeleteController.id,sb.append(name.getCharacters()).toString(),Integer.parseInt(s));
+
+        Query.delete_entry(DeleteController.id,sb.append(name.getCharacters()).toString(),Integer.parseInt(s));
     }
 
     @FXML

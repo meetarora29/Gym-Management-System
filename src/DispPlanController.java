@@ -34,6 +34,7 @@ public class DispPlanController {
 
     @FXML
     void getPlans(ActionEvent event) {
+        Query.print_all("Plans");
 
     }
 

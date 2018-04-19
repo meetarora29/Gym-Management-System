@@ -35,8 +35,9 @@ public class DispPlanBudgetController {
     }
 
     @FXML
-    void clickDone(ActionEvent event) {
-        System.out.println((int)budget_slider.getValue());
+    void clickDone(ActionEvent event)
+    {
+        Query.print_budget_plans((int)budget_slider.getValue());
     }
     @FXML
 

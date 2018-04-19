@@ -46,12 +46,10 @@ public class DispMemController {
     @FXML
     void getMem_plan_expire(ActionEvent event) {
 
+        Query.print_members_with_plans_expired();
     }
 
-    @FXML
-    void getMem_plan_update(ActionEvent event) {
 
-    }
 
     @FXML
     void getName_Age(ActionEvent event) throws IOException {
@@ -62,13 +60,15 @@ public class DispMemController {
 
 
     @FXML
-    void getNames(ActionEvent event) {
-
+    void getNames(ActionEvent event)
+    {
+        Query.print_all("Members");
     }
 
     @FXML
     void getTrainer(ActionEvent event) {
 
+        Query.print_popular_trainer();
     }
 
 

@@ -38,6 +38,7 @@ public class DispMemberCountController {
     @FXML
     void clickDone(ActionEvent event) {
 
+        Query.count_by_sex((int)lowerAge.getValue(),(int)upperAge.getValue());
     }
 
     @FXML

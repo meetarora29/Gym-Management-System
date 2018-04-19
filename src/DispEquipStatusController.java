@@ -32,7 +32,7 @@ public class DispEquipStatusController {
 
     @FXML
     void clickDone(ActionEvent event) {
-
+        Query.print_equipment_status(status.getValue());
     }
 
     @FXML

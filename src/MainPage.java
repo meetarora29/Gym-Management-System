@@ -19,6 +19,7 @@ public class MainPage extends Application {
     public static Stage window;
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Query q=Query.getInstance();
         window=primaryStage;
         window.setTitle("Body Mechanics");
 //        window.setResizable(false);//the window is not resizable, it would remzain of the same size.

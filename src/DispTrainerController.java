@@ -30,8 +30,9 @@ public class DispTrainerController {
     }
 
     @FXML
-    void getNames(ActionEvent event) {
-
+    void getNames(ActionEvent event)
+    {
+        Query.print_all("Trainers");
     }
 
     @FXML
@@ -42,6 +43,7 @@ public class DispTrainerController {
 
     @FXML
     void getSalary(ActionEvent event) {
+        Query.print_total_salary_to_give();
 
     }
 

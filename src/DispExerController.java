@@ -28,7 +28,7 @@ public class DispExerController {
 
     @FXML
     void getNames(ActionEvent event) {
-
+        Query.print_all("Exercise");
     }
 
 }

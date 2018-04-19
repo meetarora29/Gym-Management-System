@@ -45,14 +45,14 @@ public class InsertTrainerController {
 
     @FXML
     void clickAdd(ActionEvent event) {
-        Query q=new Query();
+
         StringBuilder sb = new StringBuilder(name.getCharacters().length());
         StringBuilder sb1 = new StringBuilder(age.getCharacters().length());
         String s=sb1.append(age.getCharacters()).toString();
         LocalDate localDate = date.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date1 = Date.from(instant);
-        q.insert_trainer(sb.append(name.getCharacters()).toString(),Integer.parseInt(s),gender.getValue(),0,date1);
+        Query.insert_trainer(sb.append(name.getCharacters()).toString(),Integer.parseInt(s),gender.getValue(),0,date1);
 
     }
 

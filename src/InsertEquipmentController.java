@@ -46,7 +46,7 @@ public class InsertEquipmentController {
     @FXML
     void clickAdd(ActionEvent event) {
 
-        Query q=new Query();
+
         StringBuilder sb = new StringBuilder(name.getCharacters().length());
         StringBuilder sb1 = new StringBuilder(cost.getCharacters().length());
         StringBuilder sb2 = new StringBuilder(bodypart.getCharacters().length());
@@ -55,7 +55,7 @@ public class InsertEquipmentController {
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date1 = Date.from(instant);
 
-        q.insert_equipment(sb.append(name.getCharacters()).toString(),date1,Integer.parseInt(s),sb2.append(bodypart.getCharacters()).toString(), status.getValue());
+        Query.insert_equipment(sb.append(name.getCharacters()).toString(),date1,Integer.parseInt(s),sb2.append(bodypart.getCharacters()).toString(), status.getValue());
     }
     @FXML
     void clickBack(ActionEvent event) throws IOException {

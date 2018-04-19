@@ -16,7 +16,7 @@ public class DispEquipBodyController {
     private Button done;
 
     @FXML
-    private TextField lower_age;
+    private TextField machine;
 
     @FXML
     private Button back;
@@ -29,7 +29,9 @@ public class DispEquipBodyController {
 
     @FXML
     void clickDone(ActionEvent event) {
+        StringBuilder sb = new StringBuilder(machine.getCharacters().length());
 
+        Query.print_bodypart_machine(sb.append(machine.getCharacters()).toString());
     }
 
 }
