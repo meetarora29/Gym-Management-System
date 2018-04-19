@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="add_equipment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InsertEquipmentController">
+   <children>
+      <TextField fx:id="purchased" layoutX="284.0" layoutY="117.5" onAction="#getPurchased" prefHeight="15.0" />
+      <TextField fx:id="status" layoutX="284.0" layoutY="277.25" onAction="#getStatus" prefHeight="15.0" />
+      <TextField fx:id="bodypart" layoutX="284.0" layoutY="224.0" onAction="#getBodyPart" prefHeight="15.0" />
+      <TextField fx:id="name" layoutX="284.0" layoutY="63.75" onAction="#getName" prefHeight="15.0" />
+      <TextField fx:id="cost" layoutX="284.0" layoutY="170.75" onAction="#getCost" prefHeight="15.0" />
+      <Label layoutX="105.0" layoutY="64.0" prefHeight="15.0" prefWidth="167.0" text="Name">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="276.0" prefHeight="15.0" prefWidth="167.0" text="Status">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="223.0" prefHeight="15.0" prefWidth="167.0" text="Body part">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="169.0" prefHeight="15.0" prefWidth="167.0" text="Cost">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="116.0" prefHeight="15.0" prefWidth="167.0" text="Purchased On">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="add" layoutX="468.0" layoutY="351.0" mnemonicParsing="false" onAction="#clickAdd" text="Add" />
+      <Button fx:id="back" layoutX="537.0" layoutY="351.0" mnemonicParsing="false" onAction="#clickBack" text="Back" />
+   </children>
+</AnchorPane>
