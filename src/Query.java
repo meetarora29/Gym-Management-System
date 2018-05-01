@@ -1,4 +1,15 @@
+import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.sql.*;
 import java.util.Date;
@@ -13,8 +24,8 @@ class Query {
             Class.forName("com.mysql.jdbc.Driver");
             connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/gym", "meet", "meet");
             statement=connection.createStatement();
-            } catch (Exception e) {
-                e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -42,7 +53,7 @@ class Query {
     static void insert_member(String name, int age, String sex, String phone, String plan, int trainer, Date plan_started) {
         java.sql.Date sql_planstarted= new java.sql.Date(plan_started.getTime());
         try {
-            int res=statement.executeUpdate("INSERT INTO gym.Members (Name, Age, Sex, Phone, Plan, Trainer, `Plan Started`) VALUES ('" + name +"'," + age + ",'" + sex + "','" + phone + "','" + plan + "'," + trainer + ",'"+ sql_planstarted +"')");
+            int res=statement.executeUpdate("INSERT INTO gym.Members (Name, Age, Sex, Phone, Plan, `Trainer ID`, `Plan Started`) VALUES ('" + name +"'," + age + ",'" + sex + "','" + phone + "','" + plan + "'," + trainer + ",'"+ sql_planstarted +"')");
             if (res==-1)
                 System.out.println("Error Occurred");
             else {
@@ -56,7 +67,7 @@ class Query {
     static void insert_equipment(String name, Date purchased_on, int cost, String body_part, String status) {
         java.sql.Date sql_purchased= new java.sql.Date(purchased_on.getTime());
         try {
-            int res=statement.executeUpdate("INSERT INTO gym.Equipment (Name, `Purchased On`, Cost, `Body Part`, Status) VALUES ('" + name +"','" + sql_purchased + "'," + cost + ",'" + body_part + "','"+ status +"')");
+            int res=statement.executeUpdate("INSERT INTO gym.Equipment (Name, `Purchased On`, Cost, Status) VALUES ('" + name +"','" + sql_purchased + "'," + cost + ",'" + body_part + "','"+ status +"')");
             if (res==-1)
                 System.out.println("Error Occurred");
             else {
@@ -112,22 +123,62 @@ class Query {
         }
     }
 
+    static Scene create_window() {
+        Stage stage=new Stage();
+        StackPane stackPane=new StackPane();
+        Scene scene=new Scene(stackPane, 800, 800);
+        stage.setScene(scene);
+        return scene;
+    }
+
     static void display_rows(ResultSet resultSet) throws SQLException {
+        Stage stage=new Stage();
+
+        TableView tableView=new TableView();
+        tableView.setFixedCellSize(25);
+
+
+        ObservableList<ObservableList> data = FXCollections.observableArrayList();
+
         ResultSetMetaData metaData=resultSet.getMetaData();
         int num_columns = metaData.getColumnCount();
-        while (resultSet.next()) {
-            for (int i=1; i<=num_columns; i++) {
-                if (i>1)
-                    System.out.printf(", ");
-                String data = resultSet.getString(i);
-                System.out.printf("%s", data);
-            }
-            System.out.println();
+
+        for (int i=0;i<num_columns;i++) {
+            final int j = i;
+            TableColumn col = new TableColumn(resultSet.getMetaData().getColumnName(i+1));
+            col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
+
+            tableView.getColumns().addAll(col);
+//            System.out.println("Column ["+i+"] ");
         }
+
+        while (resultSet.next()) {
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i=1; i<=num_columns; i++) {
+//                if (i>1)
+//                    System.out.printf(", ");
+//                String data = resultSet.getString(i);
+//                System.out.printf("%s", data);
+//                System.out.println(resultSet.getString(i));
+                String value = resultSet.getString(i);
+                if (resultSet.wasNull())
+                    value="None";
+                row.add(value);
+            }
+            data.addAll(row);
+        }
+
+        tableView.setItems(data);
+
+        Scene scene = new Scene(tableView, 600, 280);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
     // Display all rows
     static void print_all(String relation) {
+        System.out.println(relation);
         try {
             ResultSet resultSet=statement.executeQuery("SELECT * FROM gym." + relation);
             display_rows(resultSet);
@@ -138,7 +189,7 @@ class Query {
 
     static void print_in_age_group(String relation, int lower, int upper) {
         try {
-            ResultSet resultSet=statement.executeQuery("SELECT ID, Name FROM gym." + relation + " WHERE Age BETWEEN " + lower + " AND " + upper);
+            ResultSet resultSet=statement.executeQuery("SELECT ID, Name, Age FROM gym." + relation + " WHERE Age BETWEEN " + lower + " AND " + upper);
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -156,7 +207,7 @@ class Query {
 
     static void print_equipment_status(String status) {
         try {
-            ResultSet resultSet=statement.executeQuery("SELECT Name, `Body Part`, `Purchased On` FROM gym.Equipment WHERE Status = '"+ status + "'");
+            ResultSet resultSet=statement.executeQuery("SELECT Name, `Purchased On` FROM gym.Equipment WHERE Status = '"+ status + "'");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,7 +217,7 @@ class Query {
     static void print_total_salary_to_give() {
         try {
 //            print_all("Trainers");
-            ResultSet resultSet=statement.executeQuery("SELECT sum(Salary) FROM gym.Trainers");
+            ResultSet resultSet=statement.executeQuery("SELECT sum(Salary) AS Salary FROM gym.Trainers");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -198,7 +249,7 @@ class Query {
             ResultSet resultSet=statement.executeQuery("SELECT" +
                     "  (SELECT COALESCE(sum(J.Cost), 0) FROM gym.Members AS M INNER JOIN gym.Plans AS J ON M.Plan = J.Name WHERE (M.`Plan Started` >= '" + sql_lower + "' AND M.`Plan Started` <= '" + sql_upper + "')) -" +
                     "  (SELECT COALESCE(sum(Salary), 0) FROM gym.Trainers AS T WHERE (T.`Last Paid` >= '" + sql_lower + "' AND T.`Last Paid` <= '" + sql_upper + "')) -" +
-                    "  (SELECT COALESCE(sum(E.Cost), 0) FROM gym.Equipment AS E WHERE (E.`Purchased On` >= '" + sql_lower + "' AND E.`Purchased On` <= '" + sql_upper + "'))");
+                    "  (SELECT COALESCE(sum(E.Cost), 0) FROM gym.Equipment AS E WHERE (E.`Purchased On` >= '" + sql_lower + "' AND E.`Purchased On` <= '" + sql_upper + "')) AS `Profit Or Loss`");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,7 +258,7 @@ class Query {
 
     static void count_by_sex(int lower, int upper) {
         try {
-            ResultSet resultSet=statement.executeQuery("SELECT Sex, count(Sex) FROM gym.Members WHERE Age BETWEEN " + lower + " AND " + upper + " GROUP BY Sex");
+            ResultSet resultSet=statement.executeQuery("SELECT Sex, count(Sex) AS Count FROM gym.Members WHERE Age BETWEEN " + lower + " AND " + upper + " GROUP BY Sex");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -216,7 +267,7 @@ class Query {
 
     static void print_popular_trainer() {
         try {
-            ResultSet resultSet=statement.executeQuery("SELECT T.Name, count(`Trainer ID`) as cnt FROM gym.Trainers as T INNER JOIN gym.Members AS M ON T.ID = M.`Trainer ID` GROUP BY T.Name ORDER BY cnt DESC LIMIT 1");
+            ResultSet resultSet=statement.executeQuery("SELECT T.Name, count(`Trainer ID`) as Count FROM gym.Trainers as T INNER JOIN gym.Members AS M ON T.ID = M.`Trainer ID` GROUP BY T.Name ORDER BY Count DESC LIMIT 1");
             display_rows(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();

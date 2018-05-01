@@ -1,8 +1,12 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.util.Date;
 
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
-        Query query= Query.getInstance();
+
+
 
         // Insertion Queries
 
@@ -44,6 +48,13 @@ public class Main {
 //        Query.count_by_sex(20, 24);
 
         // Print popular trainer
-        Query.print_popular_trainer();
+//        Query.print_popular_trainer();
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Query query= Query.getInstance();
+        Query.print_all("Members");
     }
 }
